@@ -1,21 +1,28 @@
-body.bg-light {
+body {
     background-color: #142d50 !important; /*Importan! para que tenga mas especificidad que boostrap*/
     font-family: 'Inter', sans-serif;
 }
 
-
-.text-primary {
+.bg-light {
+     background-color: #142d50 !important; /*Importan! para que tenga mas especificidad que boostrap*/
+    font-family: 'Inter', sans-serif;
+}
+.texto-primario {
     color: #f7f7f9 !important; 
 }
 
-
-.text-secondary {
+h1 {
+    text-align: center;
+    padding-top: 10px;
+    color: #f7f7f9 !important; 
+}
+.texto-secondario {
     color: #d9eef8 !important; 
 }
 
 
 .btn-primary {
-    background-color: #0d1440  ; 
+    background-color: #233bd3  ; 
     border: none;
     padding: 15px 40px;
     border-radius: 10px; 
@@ -31,4 +38,11 @@ body.bg-light {
 
 h1.display-4 {
     letter-spacing: -1px;
+}
+
+.container { max-width: 400px; margin: 0 auto; }
+    #mensaje { min-height: 60px; } /* Espacio reservado para la alerta */
+
+h2 {
+    padding-top: 20px;
 }
