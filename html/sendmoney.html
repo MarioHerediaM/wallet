@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Wallet - Enviar Dinero</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+
+  <div class="container">
+    <h2 class="texto-primario">Enviar Dinero</h2>
+    <div id="alert-container"></div>
+
+    <div class="form-group mt-3">
+      <input type="text" id="inputBusqueda" class="form-control" placeholder="Buscar por nombre o alias...">
+    </div>
+
+    <button id="btnMostrarForm" class="btn btn-outline-primary btn-block mb-3">+ Agregar nuevo contacto</button>
+
+    <div id="nuevoContactoForm" style="display: none;" class="mb-4">
+      <h5>Nuevo Contacto</h5>
+      <input type="text" id="nombre" class="form-control mb-2" placeholder="Nombre y Apellido">
+      <input type="number" id="cbu" class="form-control mb-2" placeholder="CBU (8 dígitos)">
+      <input type="text" id="alias" class="form-control mb-2" placeholder="Alias">
+      <div class="d-flex justify-content-between">
+        <button id="btnGuardar" class="btn btn-success btn-sm">Guardar</button>
+        <button id="btnCancelar" class="btn btn-secondary btn-sm">Cancelar</button>
+      </div>
+    </div>
+
+    <ul id="listaContactos" class="list-group mb-3">
+      <li class="list-group-item contacto-item" data-nombre="John Doe" data-alias="john.doe">
+        <strong>John Doe</strong> (john.doe) <br> <small>CBU: 12345678</small>
+      </li>
+      <li class="list-group-item contacto-item" data-nombre="Jane Smith" data-alias="jane.smith">
+        <strong>Jane Smith</strong> (jane.smith) <br> <small>CBU: 87654321</small>
+      </li>
+    </ul>
+
+    <div id="seccionEnvio" style="display: none;">
+      <div class="form-group">
+        <label>Monto a enviar:</label>
+        <input type="number" id="montoEnvio" class="form-control" placeholder="0.00">
+      </div>
+      <button id="btnEnviarDinero" class="btn btn-primary btn-block">Enviar Dinero</button>
+    </div>
+
+    <a href="menu.html" class="btn btn-link btn-block mt-3">Volver al Menú</a>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="/js/script.js"></script>
+</body>
+</html>
