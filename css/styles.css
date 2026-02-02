@@ -14,27 +14,11 @@ body {
 h1 {
     text-align: center;
     padding-top: 10px;
-    color: #f7f7f9 !important; 
 }
 .texto-secondario {
     color: #d9eef8 !important; 
 }
 
-
-.btn-primary {
-    background-color: #233bd3  ; 
-    border: none;
-    padding: 15px 40px;
-    border-radius: 10px; 
-    font-weight: 600;
-    transition: all 0.3s ease; 
-}
-
-.btn-primary:hover {
-    background-color: #d9eef8; 
-    transform: translateY(-3px); 
-    box-shadow: 0 10px 20px rgba(0,0,0,0.15) !important;
-}
 
 h1.display-4 {
     letter-spacing: -1px;
@@ -46,3 +30,6 @@ h1.display-4 {
 h2 {
     padding-top: 20px;
 }
+
+.container { max-width: 400px; margin: 0 auto; }
+.saldo-info { background: #f8f9fa; padding: 10px; border-radius: 5px; margin-bottom: 20px; }
