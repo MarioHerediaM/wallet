@@ -1,21 +1,3 @@
-//  //Esto me sirve para capturar la info que necesito
-// const botonLogin = document.getElementById("botonLog");
-// const inputEmail = document.getElementById("email");
-// const inputPassword = document.getElementById("password");
-
-// //Con esto se hace que se active la funcion al hacerle click al boton
-// botonLogin.addEventListener("click", function() {
-//     const correoCorrecto = "correo@gmail.com";
-//     const claveCorrecta = "123";
-//     //Chequear que coincidan los datos del usuario con los datos que nosotros tenemos guardados
-//     if (inputEmail.value === correoCorrecto && inputPassword.value === claveCorrecta) {
-//         alert("Bienvenido, datos correctos");
-//         window.location.href = "menu.html";
-//       } else {
-//         alert("Email o contraseña incorrectos");
-//       }
-//     });
-
 $(document).ready(function () {
   $("#loginForm").submit(function (event) {
     event.preventDefault(); // Evita que la página se recargue
@@ -53,36 +35,6 @@ $(document).ready(function () {
   });
 });
 
-
-//  // Al cargar la página, leer el saldo del localStorage
-// const saldoGuardado = localStorage.getItem("saldo") || 60000;
-// document.getElementById("saldoDisplay").innerText = "$" + saldoGuardado;
-// //Obtener la info que necesitamos
-// const mensajeDiv = document.getElementById("mensaje");
-//     const btnDeposito = document.getElementById("botonDeposito");
-//     const btnEnviar = document.getElementById("botonEnviar");
-//     const btnMovimientos = document.getElementById("botonMovimientos");
-//     //Funcion para redireccion 
-//     function redirigir(nombrePagina, url) {
-//         //Aca se agarra al div y se le escribe un mensaje
-//         mensajeDiv.innerText = "Redirigiendo a " + nombrePagina + "... ";
-//         //Esto supuestamente es para que espere 1.5 segundos y asi se pueda leer el mensaje
-//        setTimeout(function() {
-//         window.location.href = url;
-//       }, 1500);
-//     }
-//     //Agregar los eventos de los clics
-//    btnDeposito.addEventListener("click", function() {
-//       redirigir("Depositar", "deposit.html");
-//     });
-
-//     btnEnviar.addEventListener("click", function() {
-//       redirigir("Enviar Dinero", "sendmoney.html");
-//     });
-
-//     btnMovimientos.addEventListener("click", function() {
-//       redirigir("Últimos Movimientos", "transactions.html");
-//     });
 
 $(document).ready(function() {
     // Mostrar el saldo desde LocalStorage al iniciar
