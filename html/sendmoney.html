@@ -1,36 +1,172 @@
-<!DOCTYPE html>
-<html lang="en">
+<!-- <!DOCTYPE html>
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-    <link rel="stylesheet" href="/css/styles.css" />
-
+  <title>Wallet - Enviar Dinero</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <style>
+    body { padding: 20px; }
+    .container { max-width: 400px; margin: 0 auto; }
+    .selected { 
+        background-color: #007bff !important; 
+        color: white !important; 
+    }
+    .list-group-item { cursor: pointer; }
+  </style>
 </head>
 <body>
+
+  <div class="container">
     <h2>Enviar Dinero</h2>
-    <h4>Buscar Contacto</h4>
-    <input type="text" placeholder="Escribe y Busca Contacto"  class="form-control">
-    <br>
-    <button class="btn btn-secondary">Buscar</button>
 
-    <br>
-    <br>
-    <div>
-        <select class="form-select" aria-label="Default select example">
-            <option selected>Contactos Registrados</option>
-            <option value="1">Persona A</option>
-            <option value="2">Persona B</option>
-            <option value="3">Persona C</option>
-        </select>
+    <button id="btnNuevoContacto" class="btn btn-info btn-block mb-3">
+        + Agregar nuevo contacto
+    </button>
+
+    <h3>Contactos</h3>
+    <ul id="contactList" class="list-group mb-3">
+      <li class="list-group-item">
+        <strong>John Doe</strong><br>
+        <small>CBU: 123456789 | Alias: john.doe | Banco: ABC</small>
+      </li>
+    </ul>
+
+    <div class="form-group">
+      <label>Monto a enviar:</label>
+      <input type="number" id="montoEnviar" class="form-control" placeholder="0.00">
     </div>
-    <br>
-    <button class="btn btn-secondary">Agregar Nuevo Contacto</button>
-    <br>
-    <br>
-    <button class="btn btn-primary">Realizar Deposito</button>
-    <button type="button" class="btn btn-secondary"><a class="link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="/html/index.html">Menu Principal</a></button>
 
+    <button id="btnEnviarDinero" class="btn btn-primary btn-block">Enviar dinero</button>
+    <a href="menu.html" class="btn btn-secondary btn-block mt-2">Volver al Menú Principal</a>
+  </div>
+
+  <script>
+    //Variables globales
+    const lista = document.getElementById("contactList");
+    let contactoSeleccionado = "";
+
+    //Evento para AGREGAR contacto (La forma más fácil: Prompt)
+    document.getElementById("btnNuevoContacto").addEventListener("click", function() {
+        const nombre = prompt("Nombre y Apellido:");
+        const cbu = prompt("Número de CBU:");
+        const alias = prompt("Alias:");
+        const banco = prompt("Nombre del Banco:");
+
+        if (nombre && cbu) {
+            const nuevoLi = document.createElement("li");
+            nuevoLi.className = "list-group-item";
+            nuevoLi.innerHTML = `<strong>${nombre}</strong><br><small>CBU: ${cbu} | Alias: ${alias} | Banco: ${banco}</small>`;
+            lista.appendChild(nuevoLi);
+        }
+    });
+
+    // Evento para seleccionar un contacto de la lista
+    lista.addEventListener("click", function(e) {
+        // Buscamos el elemento LI que se tocó
+        const elementoHijo = e.target.closest(".list-group-item");
+        
+        // Desmarcamos todos y marcamos el actual
+        Array.from(lista.children).forEach(li => li.classList.remove("selected"));
+        elementoHijo.classList.add("selected");
+        
+        // Guardamos el nombre del seleccionado
+        contactoSeleccionado = elementoHijo.querySelector("strong").innerText;
+    });
+
+    //Evento para ENVIAR dinero y restar saldo
+    document.getElementById("btnEnviarDinero").addEventListener("click", function() {
+        const monto = parseFloat(document.getElementById("montoEnviar").value);
+        const saldoActual = parseFloat(localStorage.getItem("saldo")) || 60000;
+
+        if (!contactoSeleccionado) {
+            alert("Por favor, selecciona un contacto de la lista.");
+            return;
+        }
+
+        if (monto > 0 && monto <= saldoActual) {
+            const nuevoSaldo = saldoActual - monto;
+            
+            // Antes de redirigir, guarda el movimiento
+            let historial = JSON.parse(localStorage.getItem("historial")) || [];
+            historial.push({
+                tipo: "Envío",
+                detalle: "Envío a " + contactoSeleccionado,
+                monto: monto,
+                fecha: new Date().toLocaleString()
+            });
+            localStorage.setItem("historial", JSON.stringify(historial));
+            // Guardamos el resultado en el "baúl" del navegador
+            localStorage.setItem("saldo", nuevoSaldo);
+            
+            alert("¡Transferencia Exitosa!\nEnviaste $" + monto + " a " + contactoSeleccionado);
+            window.location.href = "menu.html";
+        } else {
+            alert("Monto inválido o saldo insuficiente.");
+        }
+    });
+  </script>
+
+</body>
+</html> -->
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Wallet - Enviar Dinero</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <style>
+    body { padding: 20px; }
+    .container { max-width: 450px; margin: 0 auto; }
+    .contacto-item { cursor: pointer; transition: 0.3s; }
+    .contacto-item.selected { background-color: #d1ecf1; border-left: 5px solid #0c5460; }
+    #nuevoContactoForm { border: 1px solid #ddd; padding: 15px; border-radius: 8px; background: #f9f9f9; }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h2>Enviar Dinero</h2>
+    <div id="alert-container"></div>
+
+    <div class="form-group mt-3">
+      <input type="text" id="inputBusqueda" class="form-control" placeholder="Buscar por nombre o alias...">
+    </div>
+
+    <button id="btnMostrarForm" class="btn btn-outline-primary btn-block mb-3">+ Agregar nuevo contacto</button>
+
+    <div id="nuevoContactoForm" style="display: none;" class="mb-4">
+      <h5>Nuevo Contacto</h5>
+      <input type="text" id="nombre" class="form-control mb-2" placeholder="Nombre y Apellido">
+      <input type="number" id="cbu" class="form-control mb-2" placeholder="CBU (8 dígitos)">
+      <input type="text" id="alias" class="form-control mb-2" placeholder="Alias">
+      <div class="d-flex justify-content-between">
+        <button id="btnGuardar" class="btn btn-success btn-sm">Guardar</button>
+        <button id="btnCancelar" class="btn btn-secondary btn-sm">Cancelar</button>
+      </div>
+    </div>
+
+    <ul id="listaContactos" class="list-group mb-3">
+      <li class="list-group-item contacto-item" data-nombre="John Doe" data-alias="john.doe">
+        <strong>John Doe</strong> (john.doe) <br> <small>CBU: 12345678</small>
+      </li>
+      <li class="list-group-item contacto-item" data-nombre="Jane Smith" data-alias="jane.smith">
+        <strong>Jane Smith</strong> (jane.smith) <br> <small>CBU: 87654321</small>
+      </li>
+    </ul>
+
+    <div id="seccionEnvio" style="display: none;">
+      <div class="form-group">
+        <label>Monto a enviar:</label>
+        <input type="number" id="montoEnvio" class="form-control" placeholder="0.00">
+      </div>
+      <button id="btnEnviarDinero" class="btn btn-primary btn-block">Enviar Dinero</button>
+    </div>
+
+    <a href="menu.html" class="btn btn-link btn-block mt-3">Volver al Menú</a>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="/js/script.js"></script>
 </body>
 </html>

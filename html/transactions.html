@@ -1,23 +1,101 @@
-<!DOCTYPE html>
-<html lang="en">
+<!-- <!DOCTYPE html>
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Transacciones</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-    <link rel="stylesheet" href="/css/styles.css">
-
+  <title>Wallet - Últimos Movimientos</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <style>
+    body { padding: 20px; }
+    .container { max-width: 400px; margin: 0 auto; }
+    .monto-positivo { color: green; font-weight: bold; }
+    .monto-negativo { color: red; font-weight: bold; }
+  </style>
 </head>
 <body>
-    <h2>Ultimos Movimientos</h2>
-    <ul class="list-group">
-        <li class="list-group-item">Transaccion 1</li>
-        <li class="list-group-item">Transaccion 2</li>
-        <li class="list-group-item">Transaccion 3</li>
-        <li class="list-group-item">Transaccion 4</li>
-        <li class="list-group-item">Transaccion 5</li>
-    </ul>
-    <button type="button" class="btn btn-secondary"><a class="link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="/html/index.html">Menu Principal</a></button>
+  <div class="container">
+    <h2>Últimos Movimientos</h2>
+    
+    <ul id="listaMovimientos" class="list-group mb-3">
+      </ul>
 
+    <button onclick="borrarHistorial()" class="btn btn-sm btn-outline-danger mb-3">Limpiar Historial</button>
+    <br>
+    <a href="menu.html" class="btn btn-secondary btn-block">Volver al Menú Principal</a>
+  </div>
+
+  <script>
+    const listaUI = document.getElementById("listaMovimientos");
+
+    // 1. Obtener los movimientos del baúl (localStorage)
+    // Si no hay nada, usamos una lista vacía []
+    const movimientos = JSON.parse(localStorage.getItem("historial")) || [];
+
+    // 2. Si no hay movimientos, mostrar un mensaje
+    if (movimientos.length === 0) {
+        listaUI.innerHTML = "<li class='list-group-item text-muted'>No hay movimientos registrados.</li>";
+    } else {
+        // 3. Recorrer los movimientos y agregarlos a la lista
+        // Usamos reverse() para que el último aparezca arriba
+        movimientos.reverse().forEach(mov => {
+            const li = document.createElement("li");
+            li.className = "list-group-item d-flex justify-content-between";
+            
+            // Decidir el color según el tipo
+            const claseMonto = mov.tipo === "Depósito" ? "monto-positivo" : "monto-negativo";
+            const signo = mov.tipo === "Depósito" ? "+" : "-";
+
+            li.innerHTML = `
+                <span>${mov.detalle} <br> <small>${mov.fecha}</small></span>
+                <span class="${claseMonto}">${signo} $${mov.monto}</span>
+            `;
+            listaUI.appendChild(li);
+        });
+    }
+
+    function borrarHistorial() {
+        if(confirm("¿Seguro quieres borrar todo el historial?")) {
+            localStorage.removeItem("historial");
+            location.reload();
+        }
+    }
+  </script>
+</body>
+</html> -->
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Wallet - Últimos Movimientos</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <style>
+    body { padding: 20px; }
+    .container { max-width: 450px; margin: 0 auto; }
+    .monto-deposito { color: #28a745; font-weight: bold; }
+    .monto-envio { color: #dc3545; font-weight: bold; }
+    .badge-tipo { font-size: 0.8em; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Movimientos</h2>
+
+    <div class="form-group mt-3">
+      <label for="filtroTipo">Filtrar por tipo:</label>
+      <select id="filtroTipo" class="form-control">
+        <option value="todos">Todos los movimientos</option>
+        <option value="deposito">Depósitos</option>
+        <option value="envio">Envíos / Transferencias</option>
+      </select>
+    </div>
+
+    <ul id="listaTransacciones" class="list-group mb-4">
+      </ul>
+
+    <a href="menu.html" class="btn btn-secondary btn-block">Volver al Menú</a>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="/js/script.js"></script>
 </body>
 </html>
