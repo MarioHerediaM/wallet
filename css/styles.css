@@ -33,3 +33,5 @@ h2 {
 
 .container { max-width: 400px; margin: 0 auto; }
 .saldo-info { background: #f8f9fa; padding: 10px; border-radius: 5px; margin-bottom: 20px; }
+#mensaje { min-height: 50px; }
+
