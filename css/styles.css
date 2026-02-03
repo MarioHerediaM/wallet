@@ -35,3 +35,10 @@ h2 {
 .saldo-info { background: #f8f9fa; padding: 10px; border-radius: 5px; margin-bottom: 20px; }
 #mensaje { min-height: 50px; }
 
+.container { max-width: 450px; margin: 0 auto; }
+.monto-deposito { color: #28a745; font-weight: bold; }
+.monto-envio { color: #dc3545; font-weight: bold; }
+.badge-tipo { font-size: 0.8em; }
+.container { max-width: 450px; margin: 0 auto; }
+.contacto-item { cursor: pointer; transition: 0.3s; }
+.contacto-item.selected { background-color: #d1ecf1; border-left: 5px solid #0c5460; }#nuevoContactoForm { border: 1px solid #ddd; padding: 15px; border-radius: 8px; background: #f9f9f9; }
