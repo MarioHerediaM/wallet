@@ -72,6 +72,9 @@ $(document).ready(function() {
 
 
 
+
+
+
 $(document).ready(function() {
     
     //Saldo mostrar
@@ -122,6 +125,8 @@ $(document).ready(function() {
         }
     });
 });
+
+
 
 
 
